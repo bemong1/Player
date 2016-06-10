@@ -22,4 +22,31 @@
     // Insert code here to tear down your application
 }
 
+- (void)open {
+    NSLog(@"test");
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    NSArray* fileTypes = @[@"mp3", @"mp4", @"mov"];
+    
+    panel.canChooseDirectories = YES;
+    panel.allowsMultipleSelection = YES;
+    panel.allowedFileTypes = fileTypes;
+    
+    panel.canResolveUbiquitousConflicts = NO;
+    
+    [panel beginWithCompletionHandler:^(NSInteger result) {
+        if(result == NSFileHandlingPanelOKButton) {
+            //            [_urlList clear];
+            NSArray* _fileURLs = [panel URLs];
+            
+            if([_fileURLs count] > 0) {
+                
+            }
+        }
+    }];
+}
+
+- (IBAction)openAction:(id)sender {
+    [self open];
+}
+
 @end

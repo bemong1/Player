@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  PlayerViewController.h
 //  Player-0610
 //
 //  Created by kwk on 2016. 6. 10..
@@ -8,8 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
-
+@interface PlayerViewController : NSViewController
 
 @end
-
