@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "PlayerController.h"
+
 @interface PlayerViewController : NSViewController
+
+@property (nonatomic) PlayerController *playerController;
 
 @end

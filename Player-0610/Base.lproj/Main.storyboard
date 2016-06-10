@@ -835,14 +835,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="360"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Se2-ZO-GPD">
-                                <rect key="frame" x="100" y="221" width="81" height="32"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tAe-JS-bOH">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Se2-ZO-GPD">
+                                <rect key="frame" x="22" y="13" width="66" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="54" id="BXg-Rn-BRa"/>
+                                    <constraint firstAttribute="height" constant="21" id="Xce-jU-JmL"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Play" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tAe-JS-bOH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="playAction:" target="Qv4-sg-gVs" id="0Rw-Cl-lKK"/>
+                                </connections>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="Se2-ZO-GPD" firstAttribute="leading" secondItem="1uo-yT-hYE" secondAttribute="leading" constant="28" id="Rha-Dp-KIw"/>
+                            <constraint firstAttribute="bottom" secondItem="Se2-ZO-GPD" secondAttribute="bottom" constant="20" id="yWS-7t-ZOF"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="qae-w8-at4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -41,7 +41,7 @@ static void *URLListContext = &URLListContext;
     NSView* playerView = _playerViewController.view;
     _playerViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:playerView];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[playerView]-0-]"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[playerView]-0-|"
                                                                       options:NSLayoutFormatAlignAllCenterY
                                                                       metrics:nil
                                                                         views:NSDictionaryOfVariableBindings(self.view, playerView)]];
@@ -51,7 +51,7 @@ static void *URLListContext = &URLListContext;
                                                                         views:NSDictionaryOfVariableBindings(self.view, playerView)]];
     
     [playerView setAlphaValue:0.9f];
-    //    [urlListView setHidden:YES];
+//    [playerView setHidden:YES];
     
     [_tableView setTarget:self];
     [_tableView setDoubleAction:@selector(doubleClickEvent:)];
