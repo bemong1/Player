@@ -72,8 +72,8 @@
 - (IBAction)seekBarAction:(id)sender;
 - (IBAction)volumeBarAction:(id)sender;
 
-- (IBAction)currentTimeAction:(id)sender;
-- (IBAction)durationTimeViewAction:(id)sender;
+- (IBAction)currentTimeViewAction:(id)sender;
+
 
 @end
 
@@ -101,7 +101,7 @@
     [_seekBarSlider sendActionOn:NSLeftMouseUpMask|NSLeftMouseDraggedMask];
     [_volumeBarSlider sendActionOn:NSLeftMouseUpMask|NSLeftMouseDraggedMask];
     
-    _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.currentTime];
+    _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_currentTime];//_playerController.currentTime];
     _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.durationTime];
     
     _seekBarSlider.floatValue = 0.0f;
@@ -159,7 +159,7 @@
         _seekBarSlider.maxValue     = _playerController.durationTime;
         _volumeBarSlider.maxValue   = 1.0f;
         
-        _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.currentTime];
+        _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_currentTime];//_playerController.currentTime];
         _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.durationTime];
     } else if(_playerController.loadState == LoadStateFailed) {
         [self setEnabledSubControllers:NO];
@@ -178,8 +178,14 @@
 
 - (void)showPlaybackTime:(NSTimer*)timer {
     _seekBarSlider.floatValue = _playerController.currentTime;
-    _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.currentTime];
-    _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.durationTime];
+    
+    if(_remainingTimeDisplay == NO) {
+        _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_currentTime];
+        _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.durationTime];
+    } else {
+        _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:[self remainingTime]];
+        _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.durationTime];
+    }
 }
 
 
@@ -210,6 +216,10 @@
     _currentTime = currentTime;
 }
 
+- (float)remainingTime {
+    return _playerController.durationTime - _playerController.currentTime;
+}
+
 - (void)setCurrentVolume:(float)currentVolume {
     [_playerController setVolume:_currentVolume];
     _currentVolume = currentVolume;
@@ -223,6 +233,7 @@
     }
     _mute = mute;
 }
+
 
 - (void)loadMediaFile:(NSURL*)url {
     _playerController = [[PlayerController alloc]initWithMediaFileURL:url andRect:self.view.bounds];
@@ -337,7 +348,7 @@
 
 - (IBAction)seekBarAction:(id)sender {
     [self setCurrentTime:_seekBarSlider.floatValue];    
-    _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.rate];
+    _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_currentTime];
 }
 
 - (IBAction)volumeBarAction:(id)sender {
@@ -391,6 +402,9 @@
     [self setMute:!_mute];
 }
 
+- (IBAction)currentTimeViewAction:(id)sender {
+    [self setRemainingTimeDisplay:!_remainingTimeDisplay];
+}
 
 #pragma mark Mouse event
 
