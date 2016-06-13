@@ -19,6 +19,7 @@
 @property (nonatomic) float currentRate;
 @property (nonatomic) float currentTime;
 @property (nonatomic, readonly) float remainingTime;
+@property (nonatomic, readonly) float durationTime;
 @property (nonatomic) float currentVolume;
 
 @property (nonatomic) BOOL repeat;

@@ -101,8 +101,8 @@
     [_seekBarSlider sendActionOn:NSLeftMouseUpMask|NSLeftMouseDraggedMask];
     [_volumeBarSlider sendActionOn:NSLeftMouseUpMask|NSLeftMouseDraggedMask];
     
-    _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_currentTime];//_playerController.currentTime];
-    _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.durationTime];
+    _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_currentTime];
+    _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:[self durationTime]];
     
     _seekBarSlider.floatValue = 0.0f;
     _volumeBarSlider.floatValue = 1.0f;
@@ -159,8 +159,8 @@
         _seekBarSlider.maxValue     = _playerController.durationTime;
         _volumeBarSlider.maxValue   = 1.0f;
         
-        _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_currentTime];//_playerController.currentTime];
-        _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.durationTime];
+        _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_currentTime];
+        _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:[self durationTime]];
     } else if(_playerController.loadState == LoadStateFailed) {
         [self setEnabledSubControllers:NO];
         [self next];
@@ -181,10 +181,10 @@
     
     if(_remainingTimeDisplay == NO) {
         _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:_currentTime];
-        _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.durationTime];
+        _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:[self durationTime]];
     } else {
         _currentTimeViewButton.title = [NSString changeTimeFloatToNSString:[self remainingTime]];
-        _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:_playerController.durationTime];
+        _durationTimeViewButton.title = [NSString changeTimeFloatToNSString:[self durationTime]];
     }
 }
 
@@ -218,6 +218,10 @@
 
 - (float)remainingTime {
     return _playerController.durationTime - _playerController.currentTime;
+}
+
+- (float)durationTime {
+    return _playerController.durationTime;
 }
 
 - (void)setCurrentVolume:(float)currentVolume {
