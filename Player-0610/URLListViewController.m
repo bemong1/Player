@@ -14,20 +14,22 @@
 
 @interface URLListViewController ()
 
+@property (nonatomic) IBOutlet NSTableView *tableView;
+
 @property (nonatomic) AppDelegate *appDelegate;
+
+@property (nonatomic) URLList *urlList;
 @property (nonatomic) PlayerViewController *playerViewController;
 
 - (IBAction)addAction:(id)sender;
 - (IBAction)removeAction:(id)sender;
-
-- (IBAction)previousAction:(id)sender;
-- (IBAction)nextAction:(id)sender;
 
 @end
 
 @implementation URLListViewController
 
 static void *URLListContext = &URLListContext;
+
 
 #pragma mark Init and Dealloc
 
@@ -36,10 +38,8 @@ static void *URLListContext = &URLListContext;
     
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
     _playerViewController = [storyboard instantiateControllerWithIdentifier:@"playerViewController"];
-    
-    
     NSView* playerView = _playerViewController.view;
-    _playerViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    playerView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:playerView];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[playerView]-0-|"
                                                                       options:NSLayoutFormatAlignAllCenterY
@@ -49,9 +49,8 @@ static void *URLListContext = &URLListContext;
                                                                       options:NSLayoutFormatAlignAllCenterX
                                                                       metrics:nil
                                                                         views:NSDictionaryOfVariableBindings(self.view, playerView)]];
-    
+    [playerView setHidden:YES];
     [playerView setAlphaValue:0.9f];
-//    [playerView setHidden:YES];
     
     [_tableView setTarget:self];
     [_tableView setDoubleAction:@selector(doubleClickEvent:)];
@@ -139,16 +138,6 @@ static void *URLListContext = &URLListContext;
     [self loadURLListInTableView];
 }
 
-- (void)previous {
-    [_urlList movingCursorToPreviousLocation];
-//    [self currentURLReadyToPlayFromURLList];
-}
-
-- (void)next {
-    [_urlList movingCursorToNextLocation];
-//    [self currentURLReadyToPlayFromURLList];
-}
-
 
 #pragma mark URLList Controller Button
 
@@ -160,14 +149,6 @@ static void *URLListContext = &URLListContext;
     [self remove];
 }
 
-- (IBAction)previousAction:(id)sender {
-    [self previous];
-}
-
-- (IBAction)nextAction:(id)sender {
-    [self next];
-}
-
 
 #pragma mark Mouse event
 
@@ -175,7 +156,10 @@ static void *URLListContext = &URLListContext;
     if([_tableView selectedRow] != -1) {
         [_urlList setCurrentCursor:[_tableView selectedRow]];
         
-//        [self currentURLReadyToPlayFromURLList];
+        [_playerViewController.view setHidden:NO];        
+        
+        [_playerViewController stopMediaFile];
+        [_playerViewController loadMediaFile:[_urlList getURLFromCurrentCursor]];
     }
 }
 

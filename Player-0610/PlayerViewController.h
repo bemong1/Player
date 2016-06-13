@@ -14,4 +14,32 @@
 
 @property (nonatomic) PlayerController *playerController;
 
+@property (nonatomic) float minRate;
+@property (nonatomic) float maxRate;
+@property (nonatomic) float currentRate;
+@property (nonatomic) float currentTime;
+@property (nonatomic) float currentVolume;
+
+@property (nonatomic) BOOL repeat;
+@property (nonatomic) BOOL shuffle;
+@property (nonatomic) BOOL mute;
+
+//@property (nonatomic) BOOL remainingTimeDisplay;
+
+- (void)loadMediaFile:(NSURL*)url;
+- (void)stopMediaFile;
+
+- (void)playOrPause;
+
+- (void)increasePlaybackRate;
+- (void)restorePlaybackRate;
+- (void)decreasePlaybackRate;
+- (void)changeVideoGravity;
+
+- (void)stepBackward;
+- (void)stepForward;
+
+- (void)previous;
+- (void)next;
+
 @end

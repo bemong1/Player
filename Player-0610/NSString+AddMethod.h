@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (Time)
+@interface NSString (AddMethod)
 
 + (NSString*)changeTimeFloatToNSString:(float)tempTime;
 

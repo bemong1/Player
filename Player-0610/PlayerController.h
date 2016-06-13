@@ -1,3 +1,4 @@
+
 //
 //  PlayerController.h
 //  FinalPlayer
@@ -12,9 +13,9 @@
 
 #pragma mark Notification
 
-extern NSString *const PlaybackStateDidChangeNotification;
-extern NSString *const LoadStateDidChangeNotification;
-extern NSString *const PlaybackDidPlayToEndTimeNotification;
+extern NSString *const PlayerControllerPlaybackStateDidChangeNotification;
+extern NSString *const PlayerControllerLoadStateDidChangeNotification;
+extern NSString *const PlayerControllerPlaybackDidPlayToEndTimeNotification;
 
 
 #pragma mark Init
@@ -25,8 +26,8 @@ extern NSString *const PlaybackDidPlayToEndTimeNotification;
 #pragma mark Playback Controller
 
 typedef NS_ENUM(NSInteger, PlaybackState) {
-    PlaybackStatePlaying,
-    PlaybackStatePaused,    
+    PlaybackStatePaused,
+    PlaybackStatePlaying,    
 };
 
 typedef NS_ENUM(NSInteger, LoadState) {

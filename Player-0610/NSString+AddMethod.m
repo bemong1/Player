@@ -8,7 +8,7 @@
 
 #import "NSString+AddMethod.h"
 
-@implementation NSString (Time)
+@implementation NSString (AddMethod)
 
 + (NSString*)changeTimeFloatToNSString:(float)tempTime {
     float tempHours =   floor((NSInteger)tempTime / 3600);
